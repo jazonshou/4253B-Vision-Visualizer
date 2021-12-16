@@ -4,6 +4,23 @@
         "project_name": "vision-test",
         "target": "v5",
         "templates": {
+            "gif-pros": {
+                "location": "C:\\Users\\24jasonz\\AppData\\Roaming\\PROS\\templates\\gif-pros@2.1.1",
+                "metadata": {
+                    "origin": "local"
+                },
+                "name": "gif-pros",
+                "py/object": "pros.conductor.templates.local_template.LocalTemplate",
+                "supported_kernels": "^3.2.0",
+                "system_files": [
+                    "include\\gif-pros\\gifclass.hpp",
+                    "firmware\\gif-pros.a",
+                    "include\\gif-pros\\gifdec.h"
+                ],
+                "target": "v5",
+                "user_files": [],
+                "version": "2.1.1"
+            },
             "kernel": {
                 "location": "C:\\Users\\24jasonz\\AppData\\Roaming\\PROS\\templates\\kernel@3.5.4",
                 "metadata": {

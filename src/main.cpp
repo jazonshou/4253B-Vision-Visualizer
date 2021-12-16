@@ -1,4 +1,7 @@
 #include "main.h"
+#include <iostream>
+#include <cstring>
+#include <string.h>
 
 #define LVGL_SCREEN_WIDTH 480
 #define LVGL_SCREEN_HEIGHT 240
@@ -138,45 +141,61 @@ lv_obj_t *background;
 lv_style_t backgroundStyle;
 
 pros::Vision vision(2, pros::E_VISION_ZERO_CENTER);
-pros::vision_signature_s_t RED_SIG = pros::Vision::signature_from_utility(1, 7439, 8051, 7744, 799, 987, 892, 11.000, 0);
+pros::vision_signature_s_t RED_SIG = pros::Vision::signature_from_utility(1, 9245, 9551, 9398, -249, -81, -165, 11.000, 0);
 // sensor.set_signature(0, RED_SIG);
 
+char thing[] = {'h', 'i'};
+char *word = thing;
+
+lv_color_t hi = LV_COLOR_MAKE(150, 0, 0);
 
 void opcontrol() {
-    lv_style_copy(&style, &lv_style_plain);
-    style.body.main_color = LV_COLOR_MAKE(150, 0, 0);
-    style.body.grad_color = LV_COLOR_MAKE(150, 0, 0);
-    style.body.radius = 0;
-    style.text.color = LV_COLOR_MAKE(255, 255, 255);
+    Gif gif("/usd/crab-rave.gif", lv_scr_act());
 
-    lv_style_copy(&backgroundStyle, &lv_style_plain);
-    backgroundStyle.body.main_color = LV_COLOR_MAKE(0, 0, 0);
-    backgroundStyle.body.grad_color = LV_COLOR_MAKE(0, 0, 0);
-    backgroundStyle.body.radius = 0;
-    backgroundStyle.text.color = LV_COLOR_MAKE(255, 255, 255);
+	while (true) {
+		pros::delay(20);
+	}
 
-    while(true) {
-        //background
-        background = lv_btn_create(lv_scr_act(), NULL); //create button, lv_scr_act() is deafult screen object
-        lv_obj_set_free_num(background, 0); //set button is to 0
-        lv_obj_set_style(background, &backgroundStyle);
-        lv_obj_set_size(background, LVGL_SCREEN_WIDTH, LVGL_SCREEN_HEIGHT); //set the button size
-        lv_obj_align(background, NULL, LV_ALIGN_CENTER, 0, 0); //set the position to top mid
 
-        pros::vision_object_s_t rtn = vision.get_by_size(0);
+    /*
+    createBtn(myButton, 20, 20, 20, 20, 1, word);
+    createBtnStyle(&style, ((lv_color_t) {{150, 0, 0, 0xff}}), bob, bob, bob, bob, bob, myButton);
+    */
 
-        myButton = lv_btn_create(lv_scr_act(), NULL); //create button, lv_scr_act() is deafult screen object
-        lv_obj_set_free_num(myButton, 0); //set button is to 0
-        lv_obj_set_style(myButton, &style);
+    // lv_style_copy(&style, &lv_style_plain);
+    // style.body.main_color = LV_COLOR_MAKE(150, 0, 0);
+    // style.body.grad_color = LV_COLOR_MAKE(150, 0, 0);
+    // style.body.radius = 0;
+    // style.text.color = LV_COLOR_MAKE(255, 255, 255);
 
-        double visionW = (double)rtn.width / (VISION_FOV_WIDTH/2) * (LVGL_SCREEN_WIDTH/2);
-        double visionH = (double)rtn.height / (VISION_FOV_HEIGHT/2) * (LVGL_SCREEN_HEIGHT/2);
-        lv_obj_set_size(myButton, visionW, visionH); //set the button size
+    // lv_style_copy(&backgroundStyle, &lv_style_plain);
+    // backgroundStyle.body.main_color = LV_COLOR_MAKE(0, 0, 0);
+    // backgroundStyle.body.grad_color = LV_COLOR_MAKE(0, 0, 0);
+    // backgroundStyle.body.radius = 0;
+    // backgroundStyle.text.color = LV_COLOR_MAKE(255, 255, 255);
 
-        double visionX = (double)rtn.x_middle_coord / (VISION_FOV_WIDTH/2) * (LVGL_SCREEN_WIDTH/2);
-        double visionY = (double)rtn.y_middle_coord / (VISION_FOV_HEIGHT/2) * (VISION_FOV_HEIGHT/2);
-        lv_obj_align(myButton, NULL, LV_ALIGN_CENTER, visionX, visionY); //set the position to top mid
+    // while(true) {
+    //     //background
+    //     background = lv_btn_create(lv_scr_act(), NULL); //create button, lv_scr_act() is deafult screen object
+    //     lv_obj_set_free_num(background, 0); //set button is to 0
+    //     lv_obj_set_style(background, &backgroundStyle);
+    //     lv_obj_set_size(background, LVGL_SCREEN_WIDTH, LVGL_SCREEN_HEIGHT); //set the button size
+    //     lv_obj_align(background, NULL, LV_ALIGN_CENTER, 0, 0); //set the position to top mid
 
-        pros::delay(40); // fat delay to minimize lag
-    }
+    //     pros::vision_object_s_t rtn = vision.get_by_size(0);
+
+    //     myButton = lv_btn_create(lv_scr_act(), NULL); //create button, lv_scr_act() is deafult screen object
+    //     lv_obj_set_free_num(myButton, 0); //set button is to 0
+    //     lv_obj_set_style(myButton, &style);
+
+    //     double visionW = (double)rtn.width / (VISION_FOV_WIDTH/2) * (LVGL_SCREEN_WIDTH/2);
+    //     double visionH = (double)rtn.height / (VISION_FOV_HEIGHT/2) * (LVGL_SCREEN_HEIGHT/2);
+    //     lv_obj_set_size(myButton, visionW, visionH); //set the button size
+
+    //     double visionX = (double)rtn.x_middle_coord / (VISION_FOV_WIDTH/2) * (LVGL_SCREEN_WIDTH/2);
+    //     double visionY = (double)rtn.y_middle_coord / (VISION_FOV_HEIGHT/2) * (VISION_FOV_HEIGHT/2);
+    //     lv_obj_align(myButton, NULL, LV_ALIGN_CENTER, visionX, visionY); //set the position to top mid
+
+    //     pros::delay(40); // fat delay to minimize lag
+    // }
 }
